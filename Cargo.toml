@@ -1,0 +1,7 @@
+[package]
+name = "calendar_wasm_rust"
+version = "0.1.0"
+authors = ["ahmad <ahmad2smile@gmail.com>"]
+
+[dependencies]
+stdweb = "0.4.7"

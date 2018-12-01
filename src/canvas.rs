@@ -6,10 +6,10 @@ use stdweb::web::{document, CanvasRenderingContext2d};
 pub struct Canvas {
 	pub canvas: CanvasElement,
 	pub ctx: CanvasRenderingContext2d,
-	scaled_height: u32,
-	scaled_width: u32,
-	height: u32,
-	width: u32,
+	pub scaled_height: u32,
+	pub scaled_width: u32,
+	pub height: u32,
+	pub width: u32,
 }
 
 impl Canvas {
@@ -36,21 +36,18 @@ impl Canvas {
 		}
 	}
 
-	pub fn draw(&self, x: u32, y: u32, color: &str) {
-		assert!(x < self.width);
-		assert!(y < self.height);
+	pub fn text(&self, text: &str, x: f64, y: f64, width: u32, font_size: u32, color: &str) {
+		let x = x * f64::from(self.scaled_width);
+		let y = y * f64::from(self.scaled_height);
 
 		self.ctx.set_fill_style_color(color);
 
-		let x = x * self.scaled_width;
-		let y = y * self.scaled_height;
+		let fonts = font_size.to_string() + "px sans-serif";
 
-		self.ctx.fill_rect(
-			f64::from(x),
-			f64::from(y),
-			f64::from(self.width),
-			f64::from(self.height),
-		);
+		self.ctx.set_font(&fonts);
+
+		self.ctx
+			.fill_text(text, f64::from(x), f64::from(y), Some(f64::from(width)));
 	}
 
 	pub fn clear_all(&self) {

@@ -1,17 +1,22 @@
 extern crate stdweb;
 
+mod calendar;
 mod canvas;
+mod date_button;
 
+use calendar::Calendar;
 use canvas::Canvas;
+
+use std::cell::RefCell;
+use std::rc::Rc;
 
 fn main() {
 	stdweb::initialize();
 
-	let canvas = Canvas::new("#canvas", 20, 20);
+	let canvas = Canvas::new("#calendarCanvas", 20, 20);
 
-	canvas.draw(5, 5, "red");
-	canvas.draw(10, 10, "blue");
-	canvas.draw(15, 15, "green");
+	let calendar = Rc::new(RefCell::new(Calendar::new(20, 20)));
+	calendar.borrow().draw(&canvas);
 
 	stdweb::event_loop();
 }

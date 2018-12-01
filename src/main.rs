@@ -1,8 +1,10 @@
+extern crate chrono;
 extern crate stdweb;
 
 mod calendar;
 mod canvas;
 mod date_button;
+mod dates;
 
 use calendar::Calendar;
 use canvas::Canvas;

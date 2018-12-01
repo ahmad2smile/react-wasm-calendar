@@ -1,5 +1,7 @@
 use canvas::Canvas;
 use date_button::DateButton;
+use dates::Dates;
+use stdweb::*;
 
 pub struct Calendar {
 	month_grid: Vec<DateButton>,
@@ -12,8 +14,9 @@ pub struct Calendar {
 impl Calendar {
 	pub fn new(width: u32, height: u32) -> Calendar {
 		let mut month_grid: Vec<DateButton> = Vec::new();
+		let dates = Dates::new();
 
-		for row in 2..8 {
+		for row in 1..7 {
 			for col in 1..8 {
 				let date = row + col;
 
